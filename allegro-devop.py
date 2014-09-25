@@ -10,9 +10,8 @@ def post_counter():
     incrBy = request.form['incrBy']
     try:
         if isinstance(int(incrBy), int):
-            global rs
             rs.incr("counter", int(incrBy))
-            return incrBy 
+            return rs.get("counter")
         else:
             return "NaN"
     except:
@@ -21,7 +20,6 @@ def post_counter():
 
 @app.route('/counter',  methods=['GET'])
 def get_counter():
-    global rs
     cv = rs.get("counter")
     return cv
 
